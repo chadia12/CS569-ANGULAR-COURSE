@@ -1,0 +1,53 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.5.7/rxjs.umd.min.js"></script>
+<script>
+//  Examples of Various ways to create observables 
+//1. simple observervable
+const {Observable ,of, from, Subject} = rxjs;
+const {filter } = rxjs.operators;
+const obs$ = new Observable((observer) => {
+    observer.next(1);
+    observer.next(2);
+    observer.next(3);
+    setTimeout(() => observer.next(4), 1000);
+});
+console.log('Before subscribe');
+const observer = obs$.subscribe((v) => console.log("received: ", v));
+console.log("after subscribe");
+
+//2.simple observervable and setTimeout 
+const obs2$ = new Observable((observer) => {
+    observer.next(1);
+    observer.next(2);
+    observer.complete();
+    observer.next(3);
+    setTimeout(() => observer.next(4), 1000);
+});
+console.log('Before subscribe');
+const observer2 = obs$.subscribe((v) => console.log("received: ", v));
+console.log("after subscribe");
+
+// 3. converting values to observables using of  from
+of(9, 10, 11)
+.pipe(
+    filter( n => n > 9),
+    map( n => n + 2)
+)
+.subscribe(console.log)
+
+//4. converting values to observables using  from
+from([3, 4, 5, 6, 7])
+.pipe(
+    map(n => n * 2)
+)
+.subscribe(console.log)
+
+
+//5. observerable using subject
+
+const mySubject$ = new Subject();
+mySubject$.subscribe(
+    value => console.log(value)
+)
+setTimeout(() => {mySubject$.next('chadia');}, 1000)
+ </script>

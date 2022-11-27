@@ -1,0 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.5.7/rxjs.umd.min.js"></script>
+<script>
+    const {BehaviorSubject} = rxjs;
+    
+const myObservable$ = new BehaviorSubject(123);
+myObservable$.subscribe(
+value => console.log(value)
+);
+setTimeout(() => { myObservable$.next(456); }, 1000);
+</script>

@@ -1,0 +1,20 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.5.7/rxjs.umd.min.js"></script>
+<script>
+// const { of } = rxjs;
+// const { mergeMap} = rxjs.operators;
+
+// of({fname:'Bella', age: 23, email:"bebe@miu.edu"})
+// .pipe(
+//     mergeMap(obj => of(obj.age, obj.email)),
+// )
+// .subscribe(console.log);
+
+const { interval,of} = rxjs;
+const {mergeMap, take} = rxjs.operators;
+interval(1000)
+.pipe(
+take(5),
+mergeMap(x => of(1, 2, 3)),
+)
+.subscribe(console.log);
+</script>
